@@ -4,16 +4,8 @@ import morgan from "morgan"; //앞의 morgan 자리에 별명으로 써도 됨
 import helmet from "helmet";
 import cookieParser from "cookie-parser";
 import bodyParser from "body-parser";
+import {userRouter} from "./router"; //default로 export한게 아닌 경우
 const app = express();
-
-const PORT = 4000;
-
-const handleListening = () => console.log(`Listening on: http://localhost:${PORT}`);
-/*
-function handleListening(){
-    console.log(`Listening on: http://localhost:${PORT}`);
-}
-*/
 
 const handleHome = (req, res) => res.send("Hello from home");
 /*
@@ -48,4 +40,6 @@ app.get("/", handleHome);
 
 app.get("/profile", handleProfile);
 
-app.listen(PORT, handleListening);
+app.use("/user", userRouter);
+
+export default app; //누군가 내 파일을 import할 때 app object를 주겠다는 뜻 
