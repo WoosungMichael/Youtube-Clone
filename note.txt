@@ -1,0 +1,15 @@
+TERMINAL에서 git commit & push
+1. git add .
+2. git commit -m "commit message"
+3. git push origin master
+
+
+mongoDB에서 비디오 지우기
+1. mongo
+2. use wetube
+3. show collections
+4. db.videos.remove({})
+5. exit
+
+
+/ means from the root of the website, without / it means from the current page.

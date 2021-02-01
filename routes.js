@@ -15,7 +15,7 @@ const CHANGE_PASSWORD = "/change-password";
 const VIDEOS = "/videos";
 const UPLOAD = "/upload";
 const VIDEO_DETAIL = "/:id"; //:를 붙여주면 express가 그 부분 값이 변하는 것을 인지함
-const EDIT_VIDEO = "/:id/edit";
+const EDIT_VIDEO = "/:id/edit"; //controller에서 어떤 data를 가지고 있다는 것을 표현하고 싶으면 [:]과[이름]을 넣으면 됨
 const DELETE_VIDEO = "/:id/delete";
 
 const routes = {
@@ -43,7 +43,13 @@ const routes = {
           return VIDEO_DETAIL;
         }
       },
-    editVideo: EDIT_VIDEO,
+    editVideo: id => {
+        if (id) {
+         return `/videos/${id}/edit`;
+        } else {
+         return EDIT_VIDEO;
+        }
+      },
     deleteVideo: DELETE_VIDEO
 };
 
