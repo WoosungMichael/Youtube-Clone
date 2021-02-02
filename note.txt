@@ -13,3 +13,7 @@ mongoDB에서 비디오 지우기
 
 
 / means from the root of the website, without / it means from the current page.
+
+// accept="video/*" : video형식만 선택 가능
+
+"webpack" : 자동으로 webpack.config.js를 찾아감

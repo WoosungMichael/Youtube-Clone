@@ -1,5 +1,6 @@
 import mongoose from "mongoose"; //mongoose : db랑 연결해주는 역할 (MongoDB : NoSQL Database로 규칙이 적고 유연함)
 import dotenv from "dotenv";
+
 dotenv.config(); //dotenv.config() 함수로 .env 파일 안의 정보를 불러올 수 있음
 
 mongoose.connect(
