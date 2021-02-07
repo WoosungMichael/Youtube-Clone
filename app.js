@@ -4,11 +4,14 @@ import morgan from "morgan"; //앞의 morgan 자리에 별명으로 써도 됨
 import helmet from "helmet";
 import cookieParser from "cookie-parser";
 import bodyParser from "body-parser";
+import passport from "passport";
 import { localsMiddleware } from "./middlewares";
 import routes from "./routes";
 import userRouter from "./routers/userRouter";
 import videoRouter from "./routers/videoRouter";
 import globalRouter from "./routers/globalRouter"; //url을 분리하는 과정
+
+import "./passport";
 
 //import {userRouter} from "./routers/userRouter"; //default로 export한게 아닌 경우
 const app = express();
@@ -42,6 +45,9 @@ app.use(cookieParser());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended:true}));
 app.use(morgan("dev")); //morgan 미들웨어의 역할: application에서 발생하는 모든 일들을 logging 하는 것
+app.use(passport.initialize());
+app.use(passport.session());
+
 app.use(localsMiddleware);
 
 //app.use(betweenHome); //순서 중요 get전에 쓴 모든 middleware 실행
