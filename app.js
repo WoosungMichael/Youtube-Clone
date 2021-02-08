@@ -5,6 +5,9 @@ import helmet from "helmet";
 import cookieParser from "cookie-parser";
 import bodyParser from "body-parser";
 import passport from "passport";
+import mongoose from "mongoose";
+import session from "express-session";
+import MongoStore from "connect-mongo";
 import { localsMiddleware } from "./middlewares";
 import routes from "./routes";
 import userRouter from "./routers/userRouter";
@@ -15,6 +18,8 @@ import "./passport";
 
 //import {userRouter} from "./routers/userRouter"; //default로 export한게 아닌 경우
 const app = express();
+
+const CokieStore = MongoStore(session);
 
 /*
 const handleHome = (req, res) => res.send("Hello from home");
@@ -41,12 +46,22 @@ app.use(helmet()); //보안 강화
 app.set('view engine',"pug");
 app.use("/uploads", express.static("uploads")); //express.static("uploads") : directory에서 file을 보내주는 middleware
 app.use("/static", express.static("static"));
-app.use(cookieParser());
+
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended:true}));
 app.use(morgan("dev")); //morgan 미들웨어의 역할: application에서 발생하는 모든 일들을 logging 하는 것
+app.use(
+    session({
+      secret: process.env.COOKIE_SECRET,
+      resave: true,
+      saveUninitialized: false,
+      store: new CokieStore({ mongooseConnection: mongoose.connection })
+    })
+  );
 app.use(passport.initialize());
 app.use(passport.session());
+
+app.use(cookieParser());
 
 app.use(localsMiddleware);
 
