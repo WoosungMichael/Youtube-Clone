@@ -18,6 +18,11 @@ const VIDEO_DETAIL = "/:id"; //:를 붙여주면 express가 그 부분 값이 �
 const EDIT_VIDEO = "/:id/edit"; //controller에서 어떤 data를 가지고 있다는 것을 표현하고 싶으면 [:]과[이름]을 넣으면 됨
 const DELETE_VIDEO = "/:id/delete";
 
+// Github
+
+const GITHUB = "/auth/github";
+const GITHUB_CALLBACK = "/auth/github/callback";
+
 const routes = {
     home: HOME,
     join: JOIN,
@@ -56,7 +61,9 @@ const routes = {
         } else {
           return DELETE_VIDEO;
         }
-      }
+      },
+      gitHub: GITHUB,
+      githubCallback: GITHUB_CALLBACK
 };
 
 export default routes;
